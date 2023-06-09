@@ -5,7 +5,7 @@ OS: OpenBSD 7.3 -current
 Shell: ksh
 
 ### $HOME
-My $HOME directory is organized like this: 
+My `$HOME` directory is organized like this: 
  - `~/etc/` for config files
  - `~/bin/` for manually installed programs' binaries
  - `~/usr/` for user's directories with following subdirectories:
@@ -18,4 +18,4 @@ My $HOME directory is organized like this:
 
 ### YMMV
 Terminal emulator is [9term](https://github.com/9fans/plan9port/tree/master/src/cmd/9term). Text editor of choice is [sam](https://github.com/9fans/plan9port/tree/master/src/cmd/sam). Both are from [plan9port](https://github.com/9fans/plan9port).
-As a window manager, I use [dwm](http://dwm.suckless.org) with some 'quality of life' patches (see `./dwm-qol.diff`). [dmenu](http://tools.suckless.org/dmenu) is a good addition to it.
+As a window manager I use [dwm](http://dwm.suckless.org) with some 'quality of life' patches (see `./dwm-qol.diff`). [dmenu](http://tools.suckless.org/dmenu) is a good addition to it.

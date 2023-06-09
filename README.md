@@ -8,14 +8,14 @@ Shell: ksh
 ### $HOME
 My `$HOME` directory is organized like this: 
  - `~/etc/` for config files
- - `~/bin/` for manually installed programs' binaries
+ - `~/bin/` for binaries of manually installed programs
  - `~/usr/` for user's directories with following subdirectories:
    - `~/usr/share/` for programs' shared files
    - `~/usr/src/` for manually installed programs
-   - `~/usr/man/` for manually installed programs' man pages
+   - `~/usr/man/` for man pages of manually installed programs
    - `~/usr/(doc, mus, pic, prj, vid, virt)/` for things I consume, use and create
  - `~/tmp/` for downloads
- - `~/var/` for session programs' data
+ - `~/var/` for session's program data
 
 ### YMMV
 Terminal emulator is [9term](https://github.com/9fans/plan9port/tree/master/src/cmd/9term). Text editor of choice is [sam](https://github.com/9fans/plan9port/tree/master/src/cmd/sam). Both are from [plan9port](https://github.com/9fans/plan9port).

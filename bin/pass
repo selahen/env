@@ -1,0 +1,80 @@
+#!/bin/sh
+
+# still wip
+deps="gpg pwgen"
+dir=${HOME}/.pwds
+
+runchecks() {
+	for s in $deps; do
+		if ! [ $(which $s 2> /dev/null) ]; then
+			echo "can't find $s, install it and try again"
+			exit 1
+		fi
+	done
+	if [ "${PASS_DIR}" != "" ]; then
+		dir=${PASS_DIR}
+	fi
+	if ! [ -d "$dir" ]; then
+		echo "password storage not found, run '$0 init'"
+		exit 1
+	fi
+}
+
+init() {
+	if [ -e "$dir" ]; then
+		echo "can't create directory $dir: file exists"
+		exit 1
+	fi
+	echo "creating $dir"
+	mkdir -p "$dir"
+	chmod 500 "$dir"
+}
+
+gen() {
+	echo "generating password for $1.."
+	pwgen -s 13 | gpg -eq -o "${PASS_DIR}/$1.gpg"
+	chmod 600 "${PASS_DIR}/$1.gpg"
+}
+
+list() {
+	echo "${PASS_DIR}":
+	for line in "${PASS_DIR}"/*; do
+		echo "- ${line##*/}" | sed 's/.gpg//g'
+	done
+}
+
+get() {
+	pass=$(gpg -dq "${PASS_DIR}"/"$1"*)
+	if [ $(which xclip 2> /dev/null) ]; then
+		echo "copying pass to clipboard.."
+		echo "$pass" | xclip -selection clipboard -i
+	else
+		echo "$pass"
+	fi
+}
+
+del() {
+	pass=$(echo "${PASS_DIR}"/"$1"*)
+	if [ "$(echo "${pass}" | wc -w | awk '{print $1}')" = "1" ]; then
+		echo "deleting ${pass##*/}" | sed 's/.gpg//g'
+		rm "$pass"
+	else
+		echo "can't delete $1"
+	fi
+}
+
+usage() {
+	echo "usage: $0 [add|show|del] <string>"
+	echo "       $0 [init|list]"
+}
+
+runchecks
+
+case $1 in
+	init) init     ;;
+	add)  gen "$2" ;;
+	list) list     ;;
+	show) get "$2" ;;
+	del*) del "$2" ;;
+	*)    usage    ;;
+esac

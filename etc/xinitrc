@@ -1,0 +1,15 @@
+#!/bin/sh
+
+xsetroot -solid gray 
+setxkbmap -layout "us,ru" -option "grp:win_space_toggle"
+
+# Trackpoint
+# xset m 5 1
+
+# Rival 3
+xset m 0 1
+
+status-bar &
+9term &
+
+exec dwm

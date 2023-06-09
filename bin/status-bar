@@ -1,0 +1,37 @@
+#!/bin/sh
+
+getip() {
+	ifconfig iwn0 | grep inet | awk '{ print $2 }'
+}
+
+getload() {
+	uptime | sed 's/.*load.*:\ //;s/,//g' | awk '{ print $2 }'
+}
+
+gettemp() {
+	sysctl -n hw.sensors.cpu0.temp0 | sed 's/\..*//'
+}
+
+getvol() {
+	sndioctl -n output.level | awk '{ print $1 * 100 }'
+}
+
+getmem() {
+	top -d1 | grep "Mem" | sed 's/.*Real:*\ //;s/\/.*//'
+}
+
+gethomesize() {
+	df -h ~ | grep "home" | awk '{ print $3 }'
+}
+
+getbat() {
+	sysctl -n hw.sensors.acpibat0.watthour3 | sed 's/\ .*//'
+}
+
+getdate() {
+	date '+%Y-%m-%d %H:%M:%S::%Z'
+}
+
+while xsetroot -name "$(getip) $(getmem) $(gethomesize) $(getvol)% $(getload) $(gettemp)C $(getbat)Wh $(getdate)"; do
+	sleep 5
+done

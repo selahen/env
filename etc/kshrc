@@ -1,0 +1,13 @@
+#!/bin/ksh
+
+. /etc/ksh.kshrc
+
+PS1="$(hostname) > "
+
+alias ls="9 lc"
+alias ll="9 ls -l"
+alias cp="cp -iv -R"
+alias mv="mv -iv"
+alias rm="rm -r"
+
+trap 'printf "exit: %s\n" "$?"' ERR

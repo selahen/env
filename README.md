@@ -2,6 +2,7 @@
 
 ### Setup
 OS: OpenBSD 7.3 -current
+
 Shell: ksh
 
 ### $HOME

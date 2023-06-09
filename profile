@@ -28,7 +28,7 @@ export XAUTHORITY XINITRC
 HISTFILE="$HOME/var/history/ksh_hist"
 HISTSIZE="2000"
 ENV="$XDG_CONFIG_HOME/kshrc"
-export ENV
+export ENV HISTFILE HISTSIZE
 
 # defaults
 GIT_PAGER="p -17"
